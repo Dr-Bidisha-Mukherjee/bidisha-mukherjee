@@ -101,7 +101,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    padding: 0 4rem 0 2rem;
 }
 
 .logo {
@@ -125,6 +125,7 @@ body {
     display: flex;
     gap: 2rem;
     list-style: none;
+    margin-right: 3rem;
 }
 
 .nav-links a {
@@ -398,13 +399,14 @@ h2 {
     .nav-content {
         flex-direction: column;
         height: 100%;
-        padding: 1rem;
+        padding: 0 1rem;
     }
 
     .nav-links {
         flex-direction: column;
         gap: 2rem;
-        margin-top: 3rem;
+        margin-right: 0;
+        padding: 2rem;
     }
 
     .menu-button {
@@ -466,6 +468,17 @@ h2 {
     .profile-img {
         width: 200px;
         height: 200px;
+    }
+}
+
+/* Additional responsive breakpoints */
+@media (max-width: 480px) {
+    .nav-content {
+        padding: 0 0.5rem;
+    }
+
+    .nav-links {
+        padding: 1.5rem;
     }
 }
 

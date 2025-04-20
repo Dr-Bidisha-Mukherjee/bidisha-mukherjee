@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f5f2eb" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#2c2220" media="(prefers-color-scheme: dark)">
+    <!-- Theme color meta tags -->
+    <meta name="theme-color" content="#f5f2eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Researcher's Website</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -125,18 +127,23 @@
         // Theme functionality
         const themeToggle = document.querySelector('.theme-toggle');
         const html = document.documentElement;
+        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
         
         // Function to update theme
         function setTheme(theme) {
             html.setAttribute('data-theme', theme);
+            
             // Update active icon
             themeToggle.querySelector('.moon').style.display = theme === 'light' ? 'block' : 'none';
             themeToggle.querySelector('.sun').style.display = theme === 'dark' ? 'block' : 'none';
             
-            // Update browser theme color
+            // Update theme color for browsers including Safari
             const themeColor = theme === 'dark' ? '#2c2220' : '#f5f2eb';
-            document.querySelector('meta[name="theme-color"][media="(prefers-color-scheme: ' + theme + ')"]')
-                .setAttribute('content', themeColor);
+            metaThemeColor.setAttribute('content', themeColor);
+
+            // Force Safari to update the theme color
+            document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')
+                .setAttribute('content', theme === 'dark' ? 'black' : 'default');
         }
 
         // Add styles to hide inactive icon initially
