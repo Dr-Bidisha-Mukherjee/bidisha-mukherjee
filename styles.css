@@ -340,7 +340,8 @@ h1 {
     background: radial-gradient(
         circle at center,
         rgba(217, 195, 176, 0.3) 0%,
-        rgba(245, 242, 235, 0) 70%
+        rgba(245, 242, 235, 0) 50%,
+        rgba(245, 242, 235, 0) 100%
     );
     z-index: -1;
     pointer-events: none;
