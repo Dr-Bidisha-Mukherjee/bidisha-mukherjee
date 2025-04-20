@@ -5,53 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Researcher's Website</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <nav class="sidebar">
-            <div class="profile">
-                <img src="profile.jpg" alt="Profile Picture" class="profile-img">
-                <h1>Researcher Name</h1>
-                <p>Research Title</p>
-            </div>
+    <div class="noise"></div>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo"><a href="#hero">BM</a></div>
             <ul class="nav-links">
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#cv">CV</a></li>
-                <li><a href="#research">Research</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#publications" class="nav-link">Publications</a></li>
+                <li><a href="#research" class="nav-link">Research</a></li>
+                <li><a href="#cv" class="nav-link">CV</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-        </nav>
-        <main class="content">
-            <section id="about">
+        </div>
+    </nav>
+
+    <main class="content">
+        <section id="hero" class="hero section">
+            <div class="section-content">
+                <div class="profile-info">
+                    <img src="Bidisha-web-pic.jpg" alt="Profile Picture" class="profile-img">
+                    <h1>Bidisha Mukherjee</h1>
+                    <p class="title">High Pressure Experimentalist</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="section-content">
                 <h2>About Me</h2>
-                <p>Welcome to my personal website. I am a researcher specializing in [Your Field]. My work focuses on [Brief Description].</p>
-            </section>
-            <section id="publications">
+                <p>Welcome, I am a researcher exploring the physics of materials under extreme pressures and temperatures. My work focuses on [Brief Description].</p>
+            </div>
+        </section>
+
+        <section id="publications" class="section">
+            <div class="section-content">
                 <h2>Publications</h2>
-                <div class="publication">
+                <div class="publication-grid">
                     <h3>Recent Publications</h3>
                     <ul>
-                        <li>Publication 1 (2024)</li>
-                        <li>Publication 2 (2023)</li>
-                        <li>Publication 3 (2022)</li>
+                        <li>
+                            <span class="pub-year">2024</span>
+                            <span class="pub-title">Publication Title 1</span>
+                        </li>
+                        <li>
+                            <span class="pub-year">2023</span>
+                            <span class="pub-title">Publication Title 2</span>
+                        </li>
+                        <li>
+                            <span class="pub-year">2022</span>
+                            <span class="pub-title">Publication Title 3</span>
+                        </li>
                     </ul>
                 </div>
-            </section>
-            <section id="cv">
-                <h2>Curriculum Vitae</h2>
-                <p>Download my CV: <a href="cv.pdf" target="_blank">PDF Version</a></p>
-            </section>
-            <section id="research">
+            </div>
+        </section>
+
+        <section id="research" class="section">
+            <div class="section-content">
                 <h2>Research</h2>
-                <p>Details about your research interests and ongoing projects.</p>
-            </section>
-            <section id="contact">
+                <div class="research-grid">
+                    <h3>Current Projects</h3>
+                    <p>Details about your research interests and ongoing projects.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cv" class="section">
+            <div class="section-content">
+                <h2>Curriculum Vitae</h2>
+                <div class="cv-download">
+                    <p>Download my CV</p>
+                    <a href="cv.pdf" target="_blank" class="button">Download PDF</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="section-content">
                 <h2>Contact</h2>
-                <p>Email: your.email@institution.edu</p>
-                <p>Office: Building Name, Room Number</p>
-            </section>
-        </main>
-    </div>
+                <div class="contact-info">
+                    <p><span>Email:</span> your.email@institution.edu</p>
+                    <p><span>Office:</span> Building Name, Room Number</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // Create the Intersection Observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Get the id of the visible section
+                        const id = entry.target.id;
+                        
+                        // Remove active class from all links
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        
+                        // Add active class to corresponding nav link
+                        const correspondingLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                        if (correspondingLink) {
+                            correspondingLink.classList.add('active');
+                        }
+                    }
+                });
+            }, {
+                // Options for the observer
+                threshold: 0.5, // Trigger when 50% of the section is visible
+                rootMargin: '-50px 0px -50px 0px' // Adjust for navbar height
+            });
+
+            // Observe all sections
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html> 
