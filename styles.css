@@ -3,6 +3,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Remove blue highlight on mobile */
+    -webkit-touch-callout: none; /* Disable callout on mobile */
 }
 
 :root {
