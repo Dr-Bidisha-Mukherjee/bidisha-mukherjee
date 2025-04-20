@@ -472,30 +472,16 @@ h2 {
 /* Media queries for responsive design */
 @media (max-width: 768px) {
     .navbar {
-        left: -250px;
-        width: 250px;
-        height: 100vh;
-        padding: 1.5rem 0;
-        -webkit-mask-image: none;
-        mask-image: none;
-    }
-
-    .navbar.active {
-        left: 0;
+        padding: 1rem 0 2rem 0;
     }
 
     .nav-content {
-        flex-direction: column;
-        height: 100%;
-        padding: 0;
-        align-items: flex-start;
+        padding: 0 1.5rem;
     }
 
     .logo {
-        width: 100%;
-        padding: 0 1.5rem;
-        margin-bottom: 0.5rem;
-        position: relative;
+        font-size: 1.2rem;
+        margin-left: 2.5rem; /* Add space for menu icon */
     }
 
     .logo::after {
@@ -505,13 +491,38 @@ h2 {
         left: 0;
         width: 100%;
         height: 1px;
-        background: linear-gradient(
-            to right,
-            transparent,
-            var(--primary-color),
-            transparent
-        );
+        background: var(--primary-color);
         opacity: 0.2;
+        margin-bottom: 0.5rem; /* Reduce gap after line */
+    }
+
+    .menu-button {
+        position: fixed;
+        left: 1rem;
+        top: 1rem;
+        z-index: 1001;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .theme-toggle {
+        position: fixed;
+        right: 1rem;
+        top: 1rem;
+        z-index: 1001;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .theme-toggle svg {
+        width: 1.5rem;
+        height: 1.5rem;
     }
 
     .nav-links {
@@ -520,29 +531,6 @@ h2 {
         margin: 0;
         padding: 0.5rem 1.5rem;
         width: 100%;
-    }
-
-    .menu-button {
-        display: block;
-        position: fixed;
-        top: 1rem;
-        left: 1rem;
-        padding: 0;
-        width: 24px;
-        height: 24px;
-    }
-
-    .theme-toggle {
-        width: 24px;
-        height: 24px;
-        font-size: 1.5rem;
-        top: 0.85rem;
-        right: 1rem;
-    }
-
-    .theme-toggle svg {
-        width: 24px;
-        height: 24px;
     }
 
     .menu-button span {
