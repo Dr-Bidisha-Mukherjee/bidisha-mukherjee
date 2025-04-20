@@ -2,6 +2,7 @@
   "name": "personal-website",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://dr-bidisha-mukherjee.github.io/bidisha-mukherjee",
   "dependencies": {
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.0",
@@ -15,7 +16,12 @@
     "postcss": "^8.4.35",
     "autoprefixer": "^10.4.17"
   },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
+  },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
