@@ -216,8 +216,8 @@ h1, h2, h3, p,
 .content {
     position: relative;
     z-index: 1;
-    overflow-y: auto;
     height: 100vh;
+    overflow-y: auto;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
 }
@@ -347,13 +347,14 @@ h1 {
 .section {
     min-height: 100vh;
     height: 100vh;
-    padding: 8rem 2rem 2rem;
+    padding: 4rem 2rem 2rem;
     position: relative;
     z-index: 1;
     display: flex;
     align-items: center;
     scroll-snap-align: start;
     scroll-snap-stop: always;
+    overflow: visible;
 }
 
 h2 {
@@ -473,6 +474,8 @@ h2 {
     margin: 0;
     line-height: 1.6;
     padding: 0.5rem 0;
+    display: flex;
+    gap: 1.5rem;
 }
 
 .contact-info a {
@@ -500,7 +503,7 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     transition: transform 0.3s ease;
     box-shadow: none;
 }
@@ -590,6 +593,12 @@ h2 {
 
     .menu-button {
         display: block;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1001;
+        width: 24px;
+        height: 24px;
     }
 
     .nav-content {
@@ -602,13 +611,14 @@ h2 {
     .logo {
         width: 100%;
         padding: 0 1.5rem;
-        margin-bottom: 2rem;
+        margin-bottom: 0.5rem;
         position: relative;
+        margin-top: 2rem;
     }
 
     .nav-links {
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 0.75rem;
         margin: 0;
         padding: 0 1.5rem;
         width: 100%;
@@ -631,34 +641,86 @@ h2 {
         z-index: -1;
     }
 
-    /* Adjust theme toggle position */
+    /* Adjust theme toggle position and size */
     .theme-toggle {
-        top: 1rem;
-        right: 1rem;
+        width: 32px;
+        height: 32px;
+        font-size: 1.5rem;
     }
 
     /* Adjust main content for mobile */
     .section {
+        min-height: 100vh;
+        height: 100vh;
         padding: 4rem 1rem 2rem;
+        overflow: visible;
     }
 
-    /* Adjust typography for mobile */
-    h1 {
-        font-size: 2.5rem;
+    .content {
+        height: 100vh;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
     }
 
-    .title {
-        font-size: 1.2rem;
+    .publication-list {
+        margin-top: 2rem;
+        max-height: calc(100vh - 8rem);
+        overflow-y: auto;
     }
 
-    /* Adjust profile image size for mobile */
-    .profile-img-container {
-        width: 200px;
-        height: 200px;
+    .cv-info .button:last-child {
+        display: none;
     }
 
-    .pdf-viewer-container {
-        height: 60vh;
+    .mobile-message {
+        display: none;
+    }
+
+    .contact-info p {
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 0.25rem 0;
+    }
+
+    .contact-info span {
+        min-width: auto;
+        margin-right: 0.5rem;
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+
+    .contact-info a {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-info a:last-child {
+        margin-bottom: 0;
+    }
+
+    .academic-links {
+        padding: 0 1rem;
+    }
+
+    /* Publication section specific */
+    .publication-list {
+        margin-top: 2rem;
+        max-height: calc(100vh - 8rem);
+        overflow-y: auto;
+    }
+
+    /* CV section specific */
+    .cv-section {
+        height: 100%;
+        overflow: visible;
+    }
+
+    /* Contact section specific */
+    .contact-section {
+        height: 100%;
+        overflow: visible;
     }
 }
 
@@ -669,7 +731,12 @@ h2 {
     }
 
     .nav-links {
-        padding: 1.5rem;
+        padding: 1rem;
+    }
+
+    .contact-info p {
+        flex-direction: column;
+        gap: 0.25rem;
     }
 }
 
@@ -889,12 +956,14 @@ section {
     }
 }
 
+/* Contact section */
 .contact-section {
     display: grid;
     grid-template-columns: 65% 35%;
     gap: 4rem;
     margin-top: 2rem;
     align-items: start;
+    height: 100%;
 }
 
 .contact-info {
@@ -902,6 +971,7 @@ section {
     flex-direction: column;
     gap: 0.75rem;
     max-width: none;
+    height: 100%;
 }
 
 .contact-info p {
@@ -932,7 +1002,7 @@ section {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    justify-content: center;
+    justify-content: flex-start;
     height: 100%;
     margin-left: 0;
 }
@@ -1013,6 +1083,44 @@ section {
 @media (max-width: 768px) {
     .contact-section {
         grid-template-columns: 1fr;
+        gap: 2rem;
+        height: auto;
+        min-height: calc(100vh - 8rem);
+        padding-bottom: 2rem;
+    }
+
+    .contact-info {
+        width: 100%;
+        padding: 1rem;
+        height: auto;
+    }
+
+    .contact-info p {
+        margin: 0;
+        flex-wrap: nowrap;
+    }
+
+    .academic-links {
+        padding: 0 1rem;
+        width: 100%;
+        height: auto;
+        margin-top: 1rem;
+    }
+
+    .academic-link {
+        width: 100%;
+    }
+
+    /* Ensure content is visible */
+    .section {
+        overflow: visible;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .content {
+        overflow-y: auto;
+        height: 100vh;
     }
 }
 
