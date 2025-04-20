@@ -207,6 +207,7 @@
         const metaThemeColor = document.querySelector('meta[name="theme-color"]');
         const cvIframe = document.getElementById('cv-iframe');
         const cvDownload = document.getElementById('cv-download');
+        const mobileCvDownload = document.getElementById('mobile-cv-download');
         
         // Function to update theme
         function setTheme(theme) {
@@ -228,10 +229,12 @@
             const cvSource = theme === 'light' ? 'cv/cv-light.html' : 'cv/cv-dark.html';
             cvIframe.setAttribute('src', cvSource);
             
-            // Update download link
+            // Update download links
             const pdfSource = theme === 'light' ? 'cv/CV-bidisha-light.pdf' : 'cv/CV-bidisha-dark.pdf';
             cvDownload.setAttribute('href', pdfSource);
             cvDownload.setAttribute('target', '_blank');
+            mobileCvDownload.setAttribute('href', pdfSource);
+            mobileCvDownload.setAttribute('target', '_blank');
         }
 
         // Add styles to hide inactive icon initially
