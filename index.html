@@ -18,7 +18,24 @@
         <span></span>
         <span></span>
     </button>
-    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+    <button class="theme-toggle" aria-label="Toggle theme">
+        <!-- Moon icon -->
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <!-- Sun icon -->
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+    </button>
     <nav class="navbar">
         <div class="nav-content">
             <div class="logo"><a href="#hero">BM</a></div>
@@ -108,18 +125,28 @@
         // Theme functionality
         const themeToggle = document.querySelector('.theme-toggle');
         const html = document.documentElement;
-        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
         
         // Function to update theme
         function setTheme(theme) {
             html.setAttribute('data-theme', theme);
-            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+            // Update active icon
+            themeToggle.querySelector('.moon').style.display = theme === 'light' ? 'block' : 'none';
+            themeToggle.querySelector('.sun').style.display = theme === 'dark' ? 'block' : 'none';
             
             // Update browser theme color
             const themeColor = theme === 'dark' ? '#2c2220' : '#f5f2eb';
             document.querySelector('meta[name="theme-color"][media="(prefers-color-scheme: ' + theme + ')"]')
                 .setAttribute('content', themeColor);
         }
+
+        // Add styles to hide inactive icon initially
+        const style = document.createElement('style');
+        style.textContent = `
+            .theme-toggle .sun { display: none; }
+            .theme-toggle[data-theme="dark"] .sun { display: block; }
+            .theme-toggle[data-theme="dark"] .moon { display: none; }
+        `;
+        document.head.appendChild(style);
 
         // Check system preference
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
