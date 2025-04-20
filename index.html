@@ -14,6 +14,11 @@
     <nav class="navbar">
         <div class="nav-content">
             <div class="logo"><a href="#hero">BM</a></div>
+            <button class="menu-button" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#publications" class="nav-link">Publications</a></li>
@@ -146,6 +151,38 @@
                 });
             });
         });
+
+        // Mobile menu functionality
+        const menuButton = document.querySelector('.menu-button');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuButton.addEventListener('click', () => {
+            menuButton.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuButton.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-content') && navLinks.classList.contains('active')) {
+                menuButton.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Prevent scrolling when menu is open
+        navLinks.addEventListener('touchmove', (e) => {
+            if (navLinks.classList.contains('active')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
     </script>
 </body>
 </html> 
